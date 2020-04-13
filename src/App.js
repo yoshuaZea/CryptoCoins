@@ -1,65 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-import Frase from './components/Frase'
+import imagen from './cryptomonedas.png'
 
-const Boton = styled.button`
-  background: -webkit-linear-gradient(top left, #007d35 0%, #007d35 40%, #0f574e 100%);
-  background-size: 300px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #fff;
-  margin-top: 3rem;
-  padding: 1rem 3rem;
-  font-size: 2rem;
-  border: 2px solid black;
-  outline: none;
-  transition: background-size 0.3s ease;
-  
-  &:hover {
-    cursor: pointer;
-    background-size: 400px;
-  }
-`
+// Componentes
+import Formulario from './components/Formulario'
 
+// Styled components
 const Contenedor = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  @media (min-width: 992px){
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+  }
 `;
 
+const Imagen = styled.img`
+  max-width: 100%;
+  margin-top: 5rem;
+`;
+
+const Heading = styled.h1`
+  font-family: 'Bebas Neue', cursive;
+  color: #fff;
+  text-align: left;
+  font-weight: 700;
+  font-size: 50px;
+  margin-bottom: 50px;
+  margin-top: 80px;
+
+  &::after {
+    content: '';
+    width: 100px;
+    height: 6px;
+    background-color: #66A2FE;
+    display: block;
+  }
+
+`;
+
+
 function App() {
-
-  const [frase, setFrase] = useState({})
-
-  const consultarAPI = () => {
-    // Consultando una API con fetchAPI
-    const api = fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes')
-    const frase = api.then(respuesta => respuesta.json() )
-    frase.then(resultado => setFrase(resultado[0]))
-  }
-
-  const consultarAPI2 = async () => {
-    // Consultando con async/await
-    const api = await fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes')
-    const frase = await api.json()
-    setFrase(frase[0])
-  }
-
-  // Cargar una frase
-  useEffect(() => {
-    consultarAPI()
-  }, [])
-
-  return (
+  return(
     <Contenedor>
-      <Frase 
-        frase={frase}
-      />
-      <Boton
-        onClick={() => consultarAPI2()}
-      >
-        Obtener frase
-      </Boton>
+      <div>
+        <Imagen 
+          src={imagen}
+          alt="Imagen crypto"
+        />
+      </div>
+      <div>
+        <Heading>Cotiza criptomonedas al instante!</Heading>
+        <Formulario 
+
+        />
+      </div>
     </Contenedor>
   );
 }
