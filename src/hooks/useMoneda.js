@@ -32,7 +32,6 @@ const useMoneda = (label, stateInicial, options) => {
         <Fragment>
             <Label>{label}</Label>
             <Select
-                defaultValue=""
                 onChange={ e => setState(e.target.value)}
                 value={state}
             >
